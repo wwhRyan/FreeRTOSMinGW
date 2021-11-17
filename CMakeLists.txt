@@ -18,5 +18,5 @@ include_directories(. FreeRTOS/include FreeRTOS/portable)
 add_executable(protocol ${SOURCE_FILES})
 
 
-find_library(LIBWMM winmm)
-target_link_libraries(protocol ${LIBWMM})
+# find_library(LIBWMM WinMM)    # for windows 10, which does not having visual studio.
+target_link_libraries(protocol WinMM.lib)

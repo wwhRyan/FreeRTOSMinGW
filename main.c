@@ -1,10 +1,9 @@
-#include <cstdio>
+#include <stdio.h>
+#include <stdbool.h>
 
-extern "C" {
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
-}
 
 xQueueHandle queue;
 

@@ -11,7 +11,7 @@ FreeRTOS/portable/*.h
 )
 
 
-set(SOURCE_FILES main.cpp ${FreeRTOSSrc})
+set(SOURCE_FILES main.c ${FreeRTOSSrc})
 include_directories(. FreeRTOS/include FreeRTOS/portable)
 
 

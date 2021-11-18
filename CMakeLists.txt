@@ -20,3 +20,7 @@ add_executable(protocol ${SOURCE_FILES})
 
 # find_library(LIBWMM WinMM)    # for windows 10, which does not having visual studio.
 target_link_libraries(protocol WinMM.lib)
+
+#learning event groups
+add_executable(event_groups main_event_group.c ${FreeRTOSSrc})
+target_link_libraries(event_groups WinMM.lib)

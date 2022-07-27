@@ -1,9 +1,9 @@
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #include "FreeRTOS.h"
-#include "task.h"
 #include "event_groups.h"
+#include "task.h"
 
 /* Declare a variable to hold the created event group. */
 EventGroupHandle_t xCreatedEventGroup;
@@ -11,16 +11,15 @@ EventGroupHandle_t xCreatedEventGroup;
 #define BIT_0 (1 << 0)
 #define BIT_4 (1 << 4)
 
-void TxTask(void *pvParameters)
+void TxTask(void* pvParameters)
 {
     EventBits_t uxBits;
 
-    while (true)
-    {
+    while (true) {
         /* Set bit 0 and bit 4 in xEventGroup. */
         uxBits = xEventGroupSetBits(
             xCreatedEventGroup, /* The event group being updated. */
-            BIT_0 | BIT_4);     /* The bits being set. */
+            BIT_0 | BIT_4); /* The bits being set. */
 
         printf("uxBits set 0x11.\n");
 
@@ -28,12 +27,11 @@ void TxTask(void *pvParameters)
     }
 }
 
-void RxTask(void *pvParameters)
+void RxTask(void* pvParameters)
 {
     EventBits_t uxBits;
 
-    while (true)
-    {
+    while (true) {
         uxBits = xEventGroupGetBits(xCreatedEventGroup);
 
         printf("uxBits is: %X\n", uxBits);
@@ -51,13 +49,10 @@ int main()
     xCreatedEventGroup = xEventGroupCreate();
 
     /* Was the event group created successfully? */
-    if (xCreatedEventGroup == NULL)
-    {
+    if (xCreatedEventGroup == NULL) {
         /* The event group was not created because there was insufficient
         FreeRTOS heap available. */
-    }
-    else
-    {
+    } else {
         /* The event group was created. */
     }
 

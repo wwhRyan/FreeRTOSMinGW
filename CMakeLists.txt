@@ -1,26 +1,18 @@
-cmake_minimum_required(VERSION 3.3)
-project(protocol)
+cmake_minimum_required(VERSION 3.5)
+project(FreeRTOSMinGW)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-
-file(GLOB FreeRTOSSrc
-FreeRTOS/*.c
-FreeRTOS/include/*.h
-FreeRTOS/portable/*.c
-FreeRTOS/portable/*.h
-)
-
+file(GLOB FreeRTOSSrc FreeRTOS/*.c FreeRTOS/include/*.h FreeRTOS/portable/*.c
+     FreeRTOS/portable/*.h)
 
 set(SOURCE_FILES main.c ${FreeRTOSSrc})
 include_directories(. FreeRTOS/include FreeRTOS/portable)
+add_executable(tasks ${SOURCE_FILES})
+target_link_libraries(tasks WinMM.lib)
 
-
-add_executable(protocol ${SOURCE_FILES})
-
-
-# find_library(LIBWMM WinMM)    # for windows 10, which does not having visual studio.
-target_link_libraries(protocol WinMM.lib)
-
-#learning event groups
+# learning event groups
 add_executable(event_groups main_event_group.c ${FreeRTOSSrc})
 target_link_libraries(event_groups WinMM.lib)
+
+# learning timers
+add_executable(timers main_timers.c ${FreeRTOSSrc})
+target_link_libraries(timers WinMM.lib)

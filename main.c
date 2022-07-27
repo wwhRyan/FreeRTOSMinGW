@@ -1,13 +1,14 @@
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #include "FreeRTOS.h"
-#include "task.h"
 #include "queue.h"
+#include "task.h"
 
 xQueueHandle queue;
 
-void TxTask(void *pvParameters) {
+void TxTask(void* pvParameters)
+{
     float x = 0;
     while (true) {
         printf("sending %f...\n", x);
@@ -17,8 +18,8 @@ void TxTask(void *pvParameters) {
     }
 }
 
-
-void RxTask(void *pvParameters) {
+void RxTask(void* pvParameters)
+{
     while (true) {
         float received;
         if (xQueueReceive(queue, &received, portMAX_DELAY) == pdTRUE) {
@@ -27,7 +28,8 @@ void RxTask(void *pvParameters) {
     }
 }
 
-int main() {
+int main()
+{
     queue = xQueueCreate(1000, sizeof(float));
 
     xTaskCreate(RxTask, "Rx", 1000, NULL, 1, NULL);
